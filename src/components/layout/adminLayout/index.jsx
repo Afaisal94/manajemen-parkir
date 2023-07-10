@@ -1,8 +1,10 @@
 import React from "react";
-import "./../../../assets/scss/styles.scss";
-import "./../../../assets/scss/_variables.scss";
-import AdminNav from "../../admin/adminNav";
+import "./../../../assets/css/all.min.css";
+import "./../../../assets/css/adminlte.min.css";
+import AdminLTELogo from "./../../../assets/img/AdminLTELogo.png";
+import AdminNav from "../../navigation/adminNav";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const AdminLayout = (props) => {
   const navigate = useNavigate();
@@ -19,60 +21,111 @@ const AdminLayout = (props) => {
   };
 
   return (
-    <div>
-      <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        {/* Navbar Brand */}
-        <a className="navbar-brand ps-3" href="index.html">
-          ADMIN POS {posId}
-        </a>
-        {/* Sidebar Toggle */}
-        <button
-          className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
-          id="sidebarToggle"
-          href="#!"
-        >
-          <i className="fas fa-bars"></i>
-        </button>
-        {/* Navbar Search */}
-        <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-          <div className="input-group"></div>
-        </form>
-        {/* Navbar Logout */}
-        <button
-          className="btn btn-sm btn-danger m-5"
-          onClick={() => UserLogout()}
-        >
-          Logout
-        </button>
-      </nav>
-      <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-          <nav
-            className="sb-sidenav accordion sb-sidenav-dark"
-            id="sidenavAccordion"
-          >
-            <AdminNav />
+    <>
+      <div className="hold-transition sidebar-mini">
+        {/* Site wrapper */}
+        <div className="wrapper">
+          {/* Navbar */}
+          <nav className="main-header navbar navbar-expand navbar-white navbar-light">
+            {/* Left navbar links */}
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <a
+                  className="nav-link"
+                  data-widget="pushmenu"
+                  href="#"
+                  role="button"
+                >
+                  <i className="fas fa-bars"></i>
+                </a>
+              </li>
+            </ul>
 
-            <div className="sb-sidenav-footer">
-              <div className="small">Logged in as:</div>
-              {nama}
-            </div>
+            {/* Right navbar links */}
+            <ul className="navbar-nav ml-auto">
+              <li>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => UserLogout()}
+                >
+                  Logout
+                </button>
+              </li>
+            </ul>
           </nav>
-        </div>
-        <div id="layoutSidenav_content">
-          <main>{props.children}</main>
-          <footer className="py-4 bg-light mt-auto">
-            <div className="container-fluid px-4">
-              <div className="d-flex align-items-center justify-content-between small">
-                <div className="text-muted">
-                  Copyright &copy; Ananda Salsabila 2022
-                </div>
+          {/* /.navbar */}
+
+          {/* Main Sidebar Container */}
+          <aside className="main-sidebar sidebar-dark-primary elevation-4">
+            {/* Brand Logo */}
+            {/* <h2 style="text-shadow: 1px 1px green; text-align: center; padding-top: 20px; padding-bottom: 20px; background-color: white;">PANEL MASTER</h2> */}
+            <a href="#" className="brand-link">
+              <img
+                src={AdminLTELogo}
+                alt="AdminLTE Logo"
+                className="brand-image img-circle elevation-3"
+                style={{ opacity: "0.8" }}
+              />
+              <span className="brand-text font-weight-light"> ADMIN POS {posId} </span>
+            </a>
+
+            {/* Sidebar */}
+            <div className="sidebar">
+              {/* Sidebar user (optional) */}
+              <div className="user-panel mt-3 mb-3">
+                <center>
+                  <p style={{ color: "white" }}>{nama}</p>
+                </center>
               </div>
+
+              {/* Sidebar Menu */}
+              <AdminNav />
+              {/* /.sidebar-menu */}
             </div>
+            {/* /.sidebar */}
+          </aside>
+
+          {/* Content Wrapper. Contains page content */}
+          <div className="content-wrapper">
+            {/* Content Here */}
+            {props.children}
+          </div>
+          {/* /.content-wrapper */}
+
+          <footer className="main-footer">
+            <div className="float-right d-none d-sm-block">
+              <b>Version</b> 1.0.0
+            </div>
+            <strong>
+              Copyright &copy; 2023
+              <a href="#">AdminLTE.io</a>.
+            </strong>
+            All rights reserved.
           </footer>
+
+          {/* Control Sidebar */}
+          <aside className="control-sidebar control-sidebar-dark">
+            {/* Control sidebar content goes here */}
+          </aside>
+          {/* /.control-sidebar */}
         </div>
+        {/* ./wrapper */}
       </div>
-    </div>
+      <Helmet>
+        <script
+          src="https://adminlte.io/themes/v3/plugins/jquery/jquery.min.js"
+          type="text/javascript"
+        />
+        <script
+          src="https://adminlte.io/themes/v3/plugins/bootstrap/js/bootstrap.bundle.min.js"
+          type="text/javascript"
+        />
+        <script
+          src="https://adminlte.io/themes/v3/dist/js/adminlte.min.js"
+          type="text/javascript"
+        />
+      </Helmet>
+    </>
   );
 };
 

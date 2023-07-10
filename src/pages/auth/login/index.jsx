@@ -10,7 +10,7 @@ function Login() {
   const { role } = useParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [userRole, setUserRole] = useState(role);
+  const [loading, setLoading] = useState(false);
   const [posId, setPosId] = useState(0);
   const [validation, setValidation] = useState([]);
   const navigate = useNavigate();
@@ -32,6 +32,7 @@ function Login() {
 
   const loginHandler = async (e) => {
     e.preventDefault();
+    setLoading(true)
 
     const formData = new URLSearchParams();
     formData.append("email", email);
@@ -43,6 +44,7 @@ function Login() {
         localStorage.setItem("nama", response.data.user.nama);
         localStorage.setItem("userId", response.data.user.id);
         localStorage.setItem("posId", posId);
+        setLoading(false)
         if (response.data.user.role == "master") {
           localStorage.setItem("role", response.data.user.role);
           navigate("/kendaraan");
@@ -53,6 +55,7 @@ function Login() {
       })
       .catch((error) => {
         setValidation(error.response.data);
+        setLoading(false)
       });
   };
 
@@ -96,21 +99,26 @@ function Login() {
                   className="form-control"
                   onChange={(e) => setPosId(e.target.value)}
                 >
-                  <option value="">- Pilih Pos Parkir -</option>
+                  
                   {!isLoading ? (
                     <>
+                    <option value="">- Pilih Pos Parkir -</option>
                       {data.map((item) => (
                         <option value={item.id}>{item.nama}</option>
                       ))}
                     </>
-                  ) : null}
+                  ) : (
+                    <>
+                      <option value="">Loading ..</option>
+                    </>
+                  )}
                 </select>
                 <label>Nama Pos</label>
               </div>
             ) : null}
             <div className="d-grid gap-2 mt-4 mb-0">
               <button type="submit" className="btn" style={{backgroundColor: '#17A589', color:'white'}}>
-                Login
+                {loading ? 'Loading ..' : 'Login'}
               </button>
             </div>
           </form>

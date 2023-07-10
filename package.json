@@ -20,6 +20,7 @@
     "react-barcode": "^1.4.6",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
     "react-js-pagination": "^3.0.3",
     "react-router-dom": "^6.6.1",
     "react-to-print": "^2.14.12",
