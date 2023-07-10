@@ -59,8 +59,8 @@ function Login() {
   return (
     <div>
       <AuthLayout>
-        <div className="card-header bg-secondary">
-          <h3 className="text-center font-weight-light my-4">
+        <div className="card-header" style={{backgroundColor: '#17A589'}}>
+          <h3 className="text-center font-weight-light my-4" style={{color:'black'}}>
             LOGIN {role.toUpperCase()}
           </h3>
         </div>
@@ -109,7 +109,7 @@ function Login() {
               </div>
             ) : null}
             <div className="d-grid gap-2 mt-4 mb-0">
-              <button type="submit" className="btn btn-secondary">
+              <button type="submit" className="btn" style={{backgroundColor: '#17A589', color:'white'}}>
                 Login
               </button>
             </div>
